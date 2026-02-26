@@ -12,14 +12,11 @@ bool is_valid_home(const char *path)
 {
     DIR *dir;
 
-    if (path == NULL || strlen(path) == 0) {
+    if (path == NULL || strlen(path) == 0)
         return false;
-    }
-    
     dir = opendir(path);
-    if (dir == NULL) {
+    if (dir == NULL)
         return false;
-    }
     closedir(dir);
     return true;
 }
