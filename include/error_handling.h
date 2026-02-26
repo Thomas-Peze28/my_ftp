@@ -14,10 +14,10 @@
 #ifndef ERR_H
     #define ERR_H
 
-    bool is_valid_port(const char *port);
-    bool is_valid_home(const char *path);
-    int print_help(void);
-    int return_error(const char *message, int return_code);
-    bool handle_errors(int argc, char **argv);
+bool is_valid_port(const char *port);
+bool is_valid_home(const char *path);
+int print_help(void);
+int return_error(const char *message, int return_code);
+bool handle_errors(int argc, char **argv);
 
 #endif /* ERR_H */

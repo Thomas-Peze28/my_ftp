@@ -5,6 +5,12 @@
 ## project
 ##
 
+SERVER	=	src/server/init_server.c	\
+
+CLIENT	=	src/client/init_clients.c	\
+			src/client/connect_client.c	\
+			src/client/disconnect_client.c	\
+
 ERRORS_HANDLING	=	src/error_handling/is_valid_home.c	\
 					src/error_handling/is_valid_port.c	\
 					src/error_handling/print_help.c	\
@@ -12,6 +18,8 @@ ERRORS_HANDLING	=	src/error_handling/is_valid_home.c	\
 					src/error_handling/return_error.c	\
 
 SRC	=	src/main.c	\
+		$(SERVER)	\
+		$(CLIENT)	\
 		$(ERRORS_HANDLING)	\
 
 OBJ	=	$(SRC:.c=.o)
@@ -23,7 +31,7 @@ CFLAGS = -Wextra -Wall -I ./include/ -lm -std=gnu17
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	epiclang -o $(NAME) $(OBJ) $(CFLAGS) 
+	epiclang -o $(NAME) $(OBJ) $(CFLAGS)
 
 clean:
 	rm -f $(OBJ)
