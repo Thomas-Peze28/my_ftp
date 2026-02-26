@@ -12,6 +12,7 @@ CLIENT	=	src/client/init_clients.c	\
 			src/client/disconnect_client.c	\
 
 COMMANDS	=	src/commands/handle_commands.c	\
+				src/commands/parse_command.c	\
 
 ERRORS_HANDLING	=	src/error_handling/is_valid_home.c	\
 					src/error_handling/is_valid_port.c	\
