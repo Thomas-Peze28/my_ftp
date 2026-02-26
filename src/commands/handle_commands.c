@@ -27,7 +27,8 @@ void handle_commands(int client_index, client_t *clients, struct pollfd *fds)
     } else if (strcmp(args[0], "QUIT") == 0 || strcmp(args[0], "quit") == 0) {
         disconnect_client(client_index, clients, fds);
     } else {
-        printf("Received command from client %d: '%s'\n", fds[client_index].fd, args[0]);
+        printf("Received command from client %d: '%s'\n",
+            fds[client_index].fd, args[0]);
         print_command_args(args);
     }
     free_args(args);
