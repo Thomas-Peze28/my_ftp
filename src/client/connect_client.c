@@ -36,7 +36,7 @@ int accept_new_connection(int server_fd, client_t *clients, struct pollfd *fds)
     slot = is_available_slot(fds);
     if (slot == -1) {
         dprintf(new_fd,
-            "Server: Maximum clients reached.\r\n");
+            "500 Maximum clients reached.\r\n");
         close(new_fd);
         return return_error("No available slot for new client", -1);
     }
@@ -44,6 +44,6 @@ int accept_new_connection(int server_fd, client_t *clients, struct pollfd *fds)
     fds[slot].events = POLLIN;
     fill_client_info(&clients[slot], new_fd);
     printf("Client connected on slot %d (fd: %d)\n", slot, new_fd);
-    dprintf(new_fd, "Server: Welcome to my FTP server!\r\n");
+    dprintf(new_fd, "220 Welcome to my FTP server!\r\n");
     return new_fd;
 }

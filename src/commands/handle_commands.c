@@ -23,6 +23,8 @@ void handle_commands(int client_index, client_t *clients, struct pollfd *fds)
     char **args = get_client_command(fds[client_index].fd);
 
     if (args == NULL) {
+        dprintf(fds[client_index].fd,
+            "500 Invalid command: Try to be more creative\r\n");
         return;
     } else if (strcmp(args[0], "QUIT") == 0 || strcmp(args[0], "quit") == 0) {
         disconnect_client(client_index, clients, fds);
