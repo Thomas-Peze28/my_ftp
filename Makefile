@@ -9,6 +9,7 @@ ERRORS_HANDLING	=	src/error_handling/is_valid_home.c	\
 					src/error_handling/is_valid_port.c	\
 					src/error_handling/print_help.c	\
 					src/error_handling/handle_errors.c	\
+					src/error_handling/return_error.c	\
 
 SRC	=	src/main.c	\
 		$(ERRORS_HANDLING)	\

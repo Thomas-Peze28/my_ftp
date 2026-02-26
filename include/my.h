@@ -5,7 +5,7 @@
 ** my.h
 */
 
-#ifndef My_H
+#ifndef MY_H
     #define MY_H
 
 #endif /* MY_H */
