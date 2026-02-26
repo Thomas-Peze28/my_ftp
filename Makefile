@@ -11,6 +11,8 @@ CLIENT	=	src/client/init_clients.c	\
 			src/client/connect_client.c	\
 			src/client/disconnect_client.c	\
 
+COMMANDS	=	src/commands/handle_commands.c	\
+
 ERRORS_HANDLING	=	src/error_handling/is_valid_home.c	\
 					src/error_handling/is_valid_port.c	\
 					src/error_handling/print_help.c	\
@@ -20,6 +22,7 @@ ERRORS_HANDLING	=	src/error_handling/is_valid_home.c	\
 SRC	=	src/main.c	\
 		$(SERVER)	\
 		$(CLIENT)	\
+		$(COMMANDS)	\
 		$(ERRORS_HANDLING)	\
 
 OBJ	=	$(SRC:.c=.o)

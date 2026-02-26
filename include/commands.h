@@ -1,0 +1,32 @@
+/*
+** EPITECH PROJECT, 2023
+** include
+** File description:
+** commands.h
+*/
+
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdbool.h>
+
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <poll.h>
+
+#ifndef COMMANDS_H
+    #define COMMANDS_H
+
+    #include "my.h"
+    #include "error_handling.h"
+    #include "client.h"
+    #include "server.h"
+    #include "constant.h"
+
+void handle_commands(int client_index, client_t *clients, struct pollfd *fds);
+
+#endif /* COMMANDS_H */

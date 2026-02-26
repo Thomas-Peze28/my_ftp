@@ -25,6 +25,7 @@
     #include "error_handling.h"
     #include "client.h"
     #include "server.h"
+    #include "commands.h"
     #include "constant.h"
 
 int myftp(int port, int socket_fd, char *path);
