@@ -13,12 +13,15 @@ CLIENT	=	src/client/init_clients.c	\
 
 COMMANDS	=	src/commands/handle_commands.c	\
 				src/commands/parse_command.c	\
+				src/commands/user.c	\
+				src/commands/pass.c	\
 
 ERRORS_HANDLING	=	src/error_handling/is_valid_home.c	\
 					src/error_handling/is_valid_port.c	\
 					src/error_handling/print_help.c	\
 					src/error_handling/handle_errors.c	\
 					src/error_handling/return_error.c	\
+					src/error_handling/ftp_response.c	\
 
 SRC	=	src/main.c	\
 		$(SERVER)	\

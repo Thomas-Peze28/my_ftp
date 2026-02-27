@@ -10,7 +10,7 @@
 void disconnect_client(int index, client_t *clients, struct pollfd *fds)
 {
     if (fds[index].fd != -1) {
-        dprintf(fds[index].fd, "221 Goodbye!\r\n");
+        ftp_response(fds[index].fd, FTP_GOODBYE);
         close(fds[index].fd);
         fds[index].fd = -1;
         clients[index].fd = -1;
