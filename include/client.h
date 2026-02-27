@@ -35,11 +35,7 @@ typedef struct client_s {
 
 void init_clients(client_t *clients, struct pollfd *fds, char *path);
 int accept_new_connection(int server_fd, client_t *clients,
-    struct pollfd *fds);
+    struct pollfd *fds, char *path);
 void disconnect_client(int index, client_t *clients, struct pollfd *fds);
-
-int connection(int socket_fd, struct sockaddr_in *client_address,
-    socklen_t client_address_len);
-int response(int accept_result);
 
 #endif /* CLIENT_H */

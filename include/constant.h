@@ -23,7 +23,7 @@
     #define FTP_NOT_LOGGED_IN "530 Please login with USER and PASS\r\n"
     #define FTP_NOT_PASSED "530 Not logged in: Password required\r\n"
     #define FTP_BAD_LOGIN "530 Not logged in: Incorrect password\r\n"
-    #define FTP_MAX_CLIENT "421 Service not available, closing control connection.\r\n"
+    #define FTP_MAX_CLIENT "421 Service not available\r\n"
 
 void ftp_response(int client_fd, const char *message);
 

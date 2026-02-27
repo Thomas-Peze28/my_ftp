@@ -29,7 +29,7 @@ int myftp(int port, int socket_fd, char *path)
     int poll_result = 0;
 
     (void)path;
-    init_clients(clients, fds);
+    init_clients(clients, fds, path);
     init_server_socket(fds, socket_fd, port);
     while (1) {
         poll_result = poll(fds, MAX_CLIENTS, -1);
@@ -38,7 +38,7 @@ int myftp(int port, int socket_fd, char *path)
             break;
         }
         if (fds[0].revents & POLLIN)
-            accept_new_connection(socket_fd, clients, fds);
+            accept_new_connection(socket_fd, clients, fds, path);
         update_event_loop(fds, clients);
     }
     close(socket_fd);

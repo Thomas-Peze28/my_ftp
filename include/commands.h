@@ -32,11 +32,12 @@ char **parse_command(const char *command);
 void print_command_args(char **args);
 void free_args(char **args);
 char **get_client_command(int client_fd);
+int verify_auth(int client_index, client_t *clients, struct pollfd *fds);
 
 void user_command(int client_index, client_t *clients, struct pollfd *fds,
     char **args);
 void pass_command(int client_index, client_t *clients, struct pollfd *fds,
     char **args);
-int verify_auth(int client_index, client_t *clients, struct pollfd *fds);
+void pwd_command(int client_index, client_t *clients, struct pollfd *fds);
 
 #endif /* COMMANDS_H */

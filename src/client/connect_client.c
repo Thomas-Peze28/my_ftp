@@ -16,15 +16,16 @@ int is_available_slot(struct pollfd *fds)
     return -1;
 }
 
-void fill_client_info(client_t *client, int fd)
+void fill_client_info(client_t *client, int fd, char *path)
 {
     client->fd = fd;
     client->is_logged = false;
     client->username = NULL;
-    client->path = NULL;
+    client->path = strdup(path);
 }
 
-int accept_new_connection(int server_fd, client_t *clients, struct pollfd *fds)
+int accept_new_connection(int server_fd, client_t *clients, struct pollfd *fds,
+    char *path)
 {
     struct sockaddr_in client_addr;
     socklen_t addr_len = sizeof(client_addr);
@@ -41,7 +42,7 @@ int accept_new_connection(int server_fd, client_t *clients, struct pollfd *fds)
     }
     fds[slot].fd = new_fd;
     fds[slot].events = POLLIN;
-    fill_client_info(&clients[slot], new_fd);
+    fill_client_info(&clients[slot], new_fd, path);
     printf("Client connected on slot %d (fd: %d)\n", slot, new_fd);
     ftp_response(new_fd, FTP_WELCOME);
     return new_fd;
