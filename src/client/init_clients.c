@@ -7,13 +7,13 @@
 
 #include "client.h"
 
-void init_clients(client_t *clients, struct pollfd *fds)
+void init_clients(client_t *clients, struct pollfd *fds, char *path)
 {
     for (int i = 0; i < MAX_CLIENTS; i++) {
         clients[i].fd = -1;
         clients[i].is_logged = false;
         clients[i].username = NULL;
-        clients[i].path = NULL;
+        clients[i].path = strdup(path);
         fds[i].fd = -1;
         fds[i].events = POLLIN;
     }

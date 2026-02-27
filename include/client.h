@@ -33,7 +33,7 @@ typedef struct client_s {
     bool is_logged;
 } client_t;
 
-void init_clients(client_t *clients, struct pollfd *fds);
+void init_clients(client_t *clients, struct pollfd *fds, char *path);
 int accept_new_connection(int server_fd, client_t *clients,
     struct pollfd *fds);
 void disconnect_client(int index, client_t *clients, struct pollfd *fds);
