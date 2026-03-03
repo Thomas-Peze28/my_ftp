@@ -46,13 +46,11 @@ void handle_commands(int client_index, client_t *clients, struct pollfd *fds)
     } else if (strcmp(args[0], "PASS") == 0 || strcmp(args[0], "pass") == 0) {
         pass_command(client_index, clients, fds, args);
     } else if (strcmp(args[0], "PWD") == 0 || strcmp(args[0], "pwd") == 0) {
-            pwd_command(client_index, clients, fds);
+        pwd_command(client_index, clients, fds);
     } else if (strcmp(args[0], "HELP") == 0 || strcmp(args[0], "help") == 0) {
-            help_command(client_index, fds);
+        help_command(client_index, fds);
     } else {
-        printf("Received command from client %d: '%s'\n",
-            fds[client_index].fd, args[0]);
-        print_command_args(args);
+        ftp_response(fds[client_index].fd, FTP_UNKNOW_CMD);
     }
     free_args(args);
 }

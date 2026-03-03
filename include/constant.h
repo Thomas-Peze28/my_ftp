@@ -18,6 +18,7 @@
     #define FTP_BAD_SEQUENCE "503 Bad sequence\r\n"
     #define FTP_REAUTH_FAIL "501 Reauthentication not supported\r\n"
     #define FTP_INVALID_CMD "500 Invalid command: Try to be more creative\r\n"
+    #define FTP_UNKNOW_CMD "500 Unknown command\r\n"
     #define FTP_NEED_USER "500 Invalid command: Username is required\r\n"
     #define FTP_NEED_PASS "500 Invalid command: Password is required\r\n"
     #define FTP_NOT_LOGGED_IN "530 Please login with USER and PASS\r\n"
