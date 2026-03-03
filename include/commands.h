@@ -39,5 +39,6 @@ void user_command(int client_index, client_t *clients, struct pollfd *fds,
 void pass_command(int client_index, client_t *clients, struct pollfd *fds,
     char **args);
 void pwd_command(int client_index, client_t *clients, struct pollfd *fds);
+void help_command(int client_index, struct pollfd *fds);
 
 #endif /* COMMANDS_H */
