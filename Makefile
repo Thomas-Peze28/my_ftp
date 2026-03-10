@@ -17,6 +17,7 @@ COMMANDS	=	src/commands/handle_commands.c	\
 				src/commands/pass.c	\
 				src/commands/pwd.c	\
 				src/commands/help.c	\
+				src/commands/noop.c	\
 
 ERRORS_HANDLING	=	src/error_handling/is_valid_home.c	\
 					src/error_handling/is_valid_port.c	\

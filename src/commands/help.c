@@ -9,9 +9,8 @@
 
 void help_command(int client_index, struct pollfd *fds)
 {
-    char *help_message =
+    ftp_response(fds[client_index].fd,
         "214-The following commands are supported:\r\n"
-        "USER PASS PWD QUIT HELP\r\n"
-        "214 End of HELP info\r\n";
-    ftp_response(fds[client_index].fd, help_message);
+        "USER PASS PWD QUIT HELP NOOP\r\n"
+        "214 End of HELP info\r\n");
 }

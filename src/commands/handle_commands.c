@@ -49,6 +49,8 @@ void handle_commands(int client_index, client_t *clients, struct pollfd *fds)
         pwd_command(client_index, clients, fds);
     } else if (strcmp(args[0], "HELP") == 0 || strcmp(args[0], "help") == 0) {
         help_command(client_index, fds);
+    } else if (strcmp(args[0], "NOOP") == 0 || strcmp(args[0], "noop") == 0) {
+        noop_command(client_index, fds);
     } else {
         ftp_response(fds[client_index].fd, FTP_UNKNOW_CMD);
     }
