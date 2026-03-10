@@ -29,7 +29,8 @@
 typedef struct client_s {
     int fd;
     char *username;
-    char *path;
+    char *current_dir;
+    char *home_dir;
     bool is_logged;
 } client_t;
 

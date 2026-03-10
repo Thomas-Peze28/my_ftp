@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2024
 ** Project
 ** File description:
-** disconnet_client
+** disconnect_client
 */
 
 #include "client.h"
@@ -16,9 +16,12 @@ void disconnect_client(int index, client_t *clients, struct pollfd *fds)
         clients[index].fd = -1;
         clients[index].is_logged = false;
         free(clients[index].username);
-        free(clients[index].path);
+        free(clients[index].current_dir);
+        free(clients[index].home_dir);
         clients[index].username = NULL;
-        clients[index].path = NULL;
+        clients[index].current_dir = NULL;
+        clients[index].home_dir = NULL;
+
         printf("Client on slot %d disconnected.\n", index);
     }
 }

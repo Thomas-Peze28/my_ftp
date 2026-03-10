@@ -18,10 +18,19 @@ int is_available_slot(struct pollfd *fds)
 
 void fill_client_info(client_t *client, int fd, char *path)
 {
+    char real_path[4096];
+
     client->fd = fd;
     client->is_logged = false;
     client->username = NULL;
-    client->path = strdup(path);
+    
+    if (realpath(path, real_path) != NULL) {
+        client->home_dir = strdup(real_path);
+        client->current_dir = strdup(real_path);
+    } else {
+        client->home_dir = strdup(path);
+        client->current_dir = strdup(path);
+    }
 }
 
 int accept_new_connection(int server_fd, client_t *clients, struct pollfd *fds,
