@@ -27,6 +27,12 @@
     #include "server.h"
     #include "constant.h"
 
+struct commands_s {
+    const char *name;
+    void (*command)(int client_index, client_t *clients, struct pollfd *fds,
+        char **args);
+};
+
 void handle_commands(int client_index, client_t *clients, struct pollfd *fds);
 char **parse_command(const char *command);
 void print_command_args(char **args);
@@ -38,8 +44,11 @@ void user_command(int client_index, client_t *clients, struct pollfd *fds,
     char **args);
 void pass_command(int client_index, client_t *clients, struct pollfd *fds,
     char **args);
-void pwd_command(int client_index, client_t *clients, struct pollfd *fds);
-void help_command(int client_index, struct pollfd *fds);
-void noop_command(int client_index, struct pollfd *fds);
+void pwd_command(int client_index, client_t *clients, struct pollfd *fds,
+    char **args);
+void help_command(int client_index, client_t *clients, struct pollfd *fds,
+    char **args);
+void noop_command(int client_index, client_t *clients, struct pollfd *fds,
+    char **args);
 
 #endif /* COMMANDS_H */

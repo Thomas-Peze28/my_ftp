@@ -7,8 +7,11 @@
 
 #include "client.h"
 
-void help_command(int client_index, struct pollfd *fds)
+void help_command(int client_index, client_t *clients, struct pollfd *fds,
+    char **args)
 {
+    (void)clients;
+    (void)args;
     ftp_response(fds[client_index].fd,
         "214-The following commands are supported:\r\n"
         "USER PASS PWD QUIT HELP NOOP\r\n"

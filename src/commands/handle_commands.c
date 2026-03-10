@@ -7,6 +7,15 @@
 
 #include "commands.h"
 
+const struct commands_s command_list[] = {
+    {"USER", user_command},
+    {"PASS", pass_command},
+    {"PWD", pwd_command},
+    {"HELP", help_command},
+    {"NOOP", noop_command},
+    {NULL, NULL}
+};
+
 int verify_auth(int client_index, client_t *clients, struct pollfd *fds)
 {
     if (!clients[client_index].is_logged
@@ -37,22 +46,13 @@ void handle_commands(int client_index, client_t *clients, struct pollfd *fds)
 {
     char **args = get_client_command(fds[client_index].fd);
 
-    if (args == NULL) {
-        return ftp_response(fds[client_index].fd, FTP_INVALID_CMD);
-    } else if (strcmp(args[0], "QUIT") == 0 || strcmp(args[0], "quit") == 0) {
-        disconnect_client(client_index, clients, fds);
-    } else if (strcmp(args[0], "USER") == 0 || strcmp(args[0], "user") == 0) {
-        user_command(client_index, clients, fds, args);
-    } else if (strcmp(args[0], "PASS") == 0 || strcmp(args[0], "pass") == 0) {
-        pass_command(client_index, clients, fds, args);
-    } else if (strcmp(args[0], "PWD") == 0 || strcmp(args[0], "pwd") == 0) {
-        pwd_command(client_index, clients, fds);
-    } else if (strcmp(args[0], "HELP") == 0 || strcmp(args[0], "help") == 0) {
-        help_command(client_index, fds);
-    } else if (strcmp(args[0], "NOOP") == 0 || strcmp(args[0], "noop") == 0) {
-        noop_command(client_index, fds);
-    } else {
-        ftp_response(fds[client_index].fd, FTP_UNKNOW_CMD);
+    for (int i = 0; command_list[i].name != NULL; i++) {
+        if (strcmp(args[0], command_list[i].name) == 0) {
+            command_list[i].command(client_index, clients, fds, args);
+            free_args(args);
+            return;
+        }
     }
+    ftp_response(fds[client_index].fd, FTP_UNKNOW_CMD);
     free_args(args);
 }
