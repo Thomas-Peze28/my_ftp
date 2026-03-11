@@ -20,6 +20,7 @@ COMMANDS	=	src/commands/handle_commands.c	\
 				src/commands/help.c	\
 				src/commands/noop.c	\
 				src/commands/cwd.c	\
+				src/commands/cdup.c	\
 
 ERRORS_HANDLING	=	src/error_handling/is_valid_home.c	\
 					src/error_handling/is_valid_port.c	\

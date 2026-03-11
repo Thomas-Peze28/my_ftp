@@ -7,13 +7,18 @@
 
 #include "client.h"
 
-void check_command(int client_index, client_t *clients, struct pollfd *fds,
+int check_cwd_command(int client_index, client_t *clients, struct pollfd *fds,
     char **args)
 {
-    if (!clients[client_index].is_logged)
-        return ftp_response(fds[client_index].fd, FTP_NOT_LOGGED_IN);
-    if (sizeof(args) < 2 || args[1] == NULL)
-        return ftp_response(fds[client_index].fd, FTP_NEED_ARG);
+    if (!clients[client_index].is_logged) {
+        ftp_response(fds[client_index].fd, FTP_NOT_LOGGED_IN);
+        return -1;
+    }
+    if (sizeof(args) < 2 || args[1] == NULL) {
+        ftp_response(fds[client_index].fd, FTP_NEED_ARG);
+        return -1;
+    }
+    return 0;
 }
 
 void cwd_command(int client_index, client_t *clients, struct pollfd *fds,
@@ -22,7 +27,8 @@ void cwd_command(int client_index, client_t *clients, struct pollfd *fds,
     char target_path[PATH_MAX];
     char resolved_path[PATH_MAX];
 
-    check_command(client_index, clients, fds, args);
+    if (check_cwd_command(client_index, clients, fds, args) == -1)
+        return;
     if (args[1][0] == '/') {
         snprintf(target_path, sizeof(target_path), "%s%s",
             clients[client_index].home_dir, args[1]);
