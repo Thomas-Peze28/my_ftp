@@ -28,10 +28,9 @@ void dele_command(int client_index, client_t *clients, struct pollfd *fds,
 
     if (check_dele_command(client_index, clients, fds, args) == -1)
         return;
-
-    snprintf(path, sizeof(path), "%s/%s", clients[client_index].current_dir, args[1]);
-
-    if(remove(path) == 0) {
+    snprintf(path, sizeof(path), "%s/%s",
+        clients[client_index].current_dir, args[1]);
+    if (remove(path) == 0) {
         ftp_response(fds[client_index].fd, FTP_FILE_DELETED);
     } else {
         ftp_response(fds[client_index].fd, FTP_FILE_DELETE_FAIL);
