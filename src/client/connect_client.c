@@ -23,7 +23,6 @@ void fill_client_info(client_t *client, int fd, char *path)
     client->fd = fd;
     client->is_logged = false;
     client->username = NULL;
-    
     if (realpath(path, real_path) != NULL) {
         client->home_dir = strdup(real_path);
         client->current_dir = strdup(real_path);

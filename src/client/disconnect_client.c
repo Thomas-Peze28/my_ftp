@@ -21,7 +21,6 @@ void disconnect_client(int index, client_t *clients, struct pollfd *fds)
         clients[index].username = NULL;
         clients[index].current_dir = NULL;
         clients[index].home_dir = NULL;
-
         printf("Client on slot %d disconnected.\n", index);
     }
 }

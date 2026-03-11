@@ -25,6 +25,12 @@
     #define FTP_NOT_PASSED "530 Not logged in: Password required\r\n"
     #define FTP_BAD_LOGIN "530 Not logged in: Incorrect password\r\n"
     #define FTP_MAX_CLIENT "421 Service not available\r\n"
+    #define FTP_NEED_ARG "501 Invalid number of parameters\r\n"
+    #define FTP_DIR_CHANGED "250 Directory successfully changed\r\n"
+    #define FTP_DIR_CHANGE_FAIL "550 Failed to change directory\r\n"
+    #define FTP_OUT_OF_ROOT "550 You try to escape the root directory !\r\n"
+
+    #define PATH_MAX 4096
 
 void ftp_response(int client_fd, const char *message);
 

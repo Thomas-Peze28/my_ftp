@@ -13,6 +13,7 @@ const struct commands_s command_list[] = {
     {"PWD", pwd_command},
     {"HELP", help_command},
     {"NOOP", noop_command},
+    {"CWD", cwd_command},
     {NULL, NULL}
 };
 
