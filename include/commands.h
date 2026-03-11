@@ -52,4 +52,6 @@ void noop_command(int client_index, client_t *clients, struct pollfd *fds,
     char **args);
 void cwd_command(int client_index, client_t *clients, struct pollfd *fds,
     char **args);
+void quit_command(int client_index, client_t *clients, struct pollfd *fds,
+    char **args);
 #endif /* COMMANDS_H */

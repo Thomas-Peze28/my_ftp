@@ -13,6 +13,7 @@ CLIENT	=	src/client/init_clients.c	\
 
 COMMANDS	=	src/commands/handle_commands.c	\
 				src/commands/parse_command.c	\
+				src/commands/quit.c	\
 				src/commands/user.c	\
 				src/commands/pass.c	\
 				src/commands/pwd.c	\
