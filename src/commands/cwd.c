@@ -29,13 +29,12 @@ void cwd_command(int client_index, client_t *clients, struct pollfd *fds,
 
     if (check_cwd_command(client_index, clients, fds, args) == -1)
         return;
-    if (args[1][0] == '/') {
+    if (args[1][0] == '/')
         snprintf(target_path, sizeof(target_path), "%s%s",
             clients[client_index].home_dir, args[1]);
-    } else {
+    else
         snprintf(target_path, sizeof(target_path), "%s/%s",
             clients[client_index].current_dir, args[1]);
-    }
     if (realpath(target_path, resolved_path) == NULL)
         return ftp_response(fds[client_index].fd, FTP_DIR_CHANGE_FAIL);
     if (strncmp(resolved_path, clients[client_index].home_dir,
