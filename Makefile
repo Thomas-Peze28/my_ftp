@@ -21,6 +21,7 @@ COMMANDS	=	src/commands/handle_commands.c	\
 				src/commands/noop.c	\
 				src/commands/cwd.c	\
 				src/commands/cdup.c	\
+				src/commands/dele.c	\
 
 ERRORS_HANDLING	=	src/error_handling/is_valid_home.c	\
 					src/error_handling/is_valid_port.c	\

@@ -56,4 +56,6 @@ void quit_command(int client_index, client_t *clients, struct pollfd *fds,
     char **args);
 void cdup_command(int client_index, client_t *clients, struct pollfd *fds,
     char **args);
+void dele_command(int client_index, client_t *clients, struct pollfd *fds,
+    char **args);
 #endif /* COMMANDS_H */

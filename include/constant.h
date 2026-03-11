@@ -29,6 +29,8 @@
     #define FTP_DIR_CHANGED "250 Directory successfully changed\r\n"
     #define FTP_DIR_CHANGE_FAIL "550 Failed to change directory\r\n"
     #define FTP_OUT_OF_ROOT "550 You try to escape the root directory !\r\n"
+    #define FTP_FILE_DELETED "250 File successfully deleted\r\n"
+    #define FTP_FILE_DELETE_FAIL "550 Failed to delete file\r\n"
 
     #define PATH_MAX 4096
 
