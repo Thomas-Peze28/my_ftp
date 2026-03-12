@@ -18,5 +18,7 @@ void init_clients(client_t *clients, struct pollfd *fds, char *path)
         clients[i].current_dir = NULL;
         fds[i].fd = -1;
         fds[i].events = POLLIN;
+        clients[i].data_fd = -1;
+        clients[i].state = INACTIVE;
     }
 }

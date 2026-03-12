@@ -17,6 +17,7 @@ const struct commands_s command_list[] = {
     {"QUIT", quit_command},
     {"CDUP", cdup_command},
     {"DELE", dele_command},
+    {"PASV", pasv_command},
     {NULL, NULL}
 };
 

@@ -22,6 +22,7 @@ COMMANDS	=	src/commands/handle_commands.c	\
 				src/commands/cwd.c	\
 				src/commands/cdup.c	\
 				src/commands/dele.c	\
+				src/commands/pasv.c	\
 
 ERRORS_HANDLING	=	src/error_handling/is_valid_home.c	\
 					src/error_handling/is_valid_port.c	\

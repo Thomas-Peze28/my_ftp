@@ -30,6 +30,8 @@ void fill_client_info(client_t *client, int fd, char *path)
         client->home_dir = strdup(path);
         client->current_dir = strdup(path);
     }
+    client->data_fd = -1;
+    client->state = INACTIVE;
 }
 
 int accept_new_connection(int server_fd, client_t *clients, struct pollfd *fds,
