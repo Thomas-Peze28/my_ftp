@@ -8,7 +8,7 @@
 #ifndef CONSTANT_H
     #define CONSTANT_H
 
-    #define MAX_CLIENTS 100
+    #define MAX_CLIENTS 1023
 
     #define FTP_WELCOME "220 Welcome to my FTP server!\r\n"
     #define FTP_GOODBYE "221 Goodbye!\r\n"
