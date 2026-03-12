@@ -56,7 +56,7 @@ void handle_commands(int client_index, client_t *clients, struct pollfd *fds)
     if (disconnected)
         disconnect_client(client_index, clients, fds);
     if (args == NULL || args[0] == NULL)
-        return;
+        return ftp_response(fds[client_index].fd, FTP_INVALID_CMD);
     for (int i = 0; command_list[i].name != NULL; i++) {
         if (strcasecmp(args[0], command_list[i].name) == 0) {
             command_list[i].command(client_index, clients, fds, args);
