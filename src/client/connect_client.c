@@ -18,7 +18,7 @@ int is_available_slot(struct pollfd *fds)
 
 void fill_client_info(client_t *client, int fd, char *path)
 {
-    char real_path[4096];
+    char real_path[PATH_MAX];
 
     client->fd = fd;
     client->is_logged = false;
@@ -52,6 +52,6 @@ int accept_new_connection(int server_fd, client_t *clients, struct pollfd *fds,
     fds[slot].events = POLLIN;
     fill_client_info(&clients[slot], new_fd, path);
     printf("Client connected on slot %d (fd: %d)\n", slot, new_fd);
-    ftp_response(new_fd, FTP_WELCOME);
+    write(new_fd, FTP_WELCOME, strlen(FTP_WELCOME));
     return new_fd;
 }
