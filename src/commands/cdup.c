@@ -15,7 +15,7 @@ int check_cdup_command(int client_index, client_t *clients, struct pollfd *fds,
         ftp_response(fds[client_index].fd, FTP_NOT_LOGGED_IN);
         return -1;
     }
-    if (sizeof(args) > 1 && args[1] != NULL) {
+    if (args[1] != NULL) {
         ftp_response(fds[client_index].fd, FTP_NEED_ARG);
         return -1;
     }

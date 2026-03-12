@@ -28,7 +28,6 @@ int myftp(int port, int socket_fd, char *path)
     client_t clients[MAX_CLIENTS];
     int poll_result = 0;
 
-    (void)path;
     init_clients(clients, fds, path);
     init_server_socket(fds, socket_fd, port);
     while (1) {
