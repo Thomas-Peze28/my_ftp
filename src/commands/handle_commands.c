@@ -35,28 +35,35 @@ int verify_auth(int client_index, client_t *clients, struct pollfd *fds)
     return 0;
 }
 
-char **get_client_command(int client_fd)
+char **get_client_command(int client_fd, bool *disconnected)
 {
     char buffer[1024];
     int bytes_read = read(client_fd, buffer, sizeof(buffer) - 1);
 
-    if (bytes_read <= 0)
+    if (bytes_read <= 0) {
+        *disconnected = true;
         return NULL;
+    }
     buffer[bytes_read] = '\0';
     return parse_command(buffer);
 }
 
 void handle_commands(int client_index, client_t *clients, struct pollfd *fds)
 {
-    char **args = get_client_command(fds[client_index].fd);
+    bool disconnected = false;
+    char **args = get_client_command(fds[client_index].fd, &disconnected);
 
+    if (disconnected)
+        disconnect_client(client_index, clients, fds);
+    if (args == NULL || args[0] == NULL)
+        return;
     for (int i = 0; command_list[i].name != NULL; i++) {
-        if (strcmp(args[0], command_list[i].name) == 0) {
+        if (strcasecmp(args[0], command_list[i].name) == 0) {
             command_list[i].command(client_index, clients, fds, args);
             free_args(args);
             return;
         }
     }
-    ftp_response(fds[client_index].fd, FTP_UNKNOW_CMD);
     free_args(args);
+    ftp_response(fds[client_index].fd, FTP_UNKNOW_CMD);
 }

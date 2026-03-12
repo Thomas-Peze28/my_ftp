@@ -37,7 +37,7 @@ void handle_commands(int client_index, client_t *clients, struct pollfd *fds);
 char **parse_command(const char *command);
 void print_command_args(char **args);
 void free_args(char **args);
-char **get_client_command(int client_fd);
+char **get_client_command(int client_fd, bool *disconnected);
 int verify_auth(int client_index, client_t *clients, struct pollfd *fds);
 
 void user_command(int client_index, client_t *clients, struct pollfd *fds,
