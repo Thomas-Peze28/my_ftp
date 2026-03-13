@@ -25,13 +25,15 @@ int count_args(const char *command)
 char **parse_command(const char *command)
 {
     int arg_count = count_args(command);
-    char **args = malloc(sizeof(char *) * (arg_count + 1));
+    char **args = NULL;
     char *token = NULL;
-    char *command_copy = strdup(command);
+    char *command_copy = NULL;
     int index = 0;
 
     if (arg_count == 0)
         return NULL;
+    args = malloc(sizeof(char *) * (arg_count + 1));
+    command_copy = strdup(command);
     token = strtok(command_copy, " \t\r\n");
     while (token != NULL && index < arg_count) {
         args[index] = strdup(token);
