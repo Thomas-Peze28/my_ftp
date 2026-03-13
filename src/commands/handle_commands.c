@@ -49,22 +49,23 @@ char **get_client_command(int client_fd, bool *disconnected)
     return parse_command(buffer);
 }
 
-void handle_commands(int client_index, client_t *clients, struct pollfd *fds)
+void handle_commands(server_t *server, int client_index)
 {
     bool disconnected = false;
-    char **args = get_client_command(fds[client_index].fd, &disconnected);
+    char **args = get_client_command(server->fds[client_index].fd,
+        &disconnected);
 
     if (disconnected)
-        disconnect_client(client_index, clients, fds);
+        disconnect_client(server, client_index);
     if (args == NULL || args[0] == NULL)
-        return ftp_response(fds[client_index].fd, FTP_INVALID_CMD);
+        return ftp_response(server->fds[client_index].fd, FTP_INVALID_CMD);
     for (int i = 0; command_list[i].name != NULL; i++) {
         if (strcasecmp(args[0], command_list[i].name) == 0) {
-            command_list[i].command(client_index, clients, fds, args);
+            command_list[i].command(server, client_index, args);
             free_args(args);
             return;
         }
     }
     free_args(args);
-    ftp_response(fds[client_index].fd, FTP_UNKNOW_CMD);
+    ftp_response(server->fds[client_index].fd, FTP_UNKNOW_CMD);
 }

@@ -5,12 +5,11 @@
 ** quit command
 */
 
-#include "client.h"
+#include "server.h"
 
-void quit_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args)
+void quit_command(server_t *server, int client_index, char **args)
 {
     (void)args;
-    disconnect_client(client_index, clients, fds);
-    ftp_response(fds[client_index].fd, FTP_GOODBYE);
+    disconnect_client(server, client_index);
+    ftp_response(server->fds[client_index].fd, FTP_GOODBYE);
 }

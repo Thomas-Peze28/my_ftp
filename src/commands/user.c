@@ -5,16 +5,15 @@
 ** user command
 */
 
-#include "client.h"
+#include "server.h"
 
-void user_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args)
+void user_command(server_t *server, int client_index, char **args)
 {
-    if (clients[client_index].is_logged)
-        return ftp_response(fds[client_index].fd, FTP_REAUTH_FAIL);
+    if (server->clients[client_index].is_logged)
+        return ftp_response(server->fds[client_index].fd, FTP_REAUTH_FAIL);
     if (args[1] == NULL)
-        return ftp_response(fds[client_index].fd, FTP_NEED_USER);
-    free(clients[client_index].username);
-    clients[client_index].username = strdup(args[1]);
-    return ftp_response(fds[client_index].fd, FTP_USER_OK);
+        return ftp_response(server->fds[client_index].fd, FTP_NEED_USER);
+    free(server->clients[client_index].username);
+    server->clients[client_index].username = strdup(args[1]);
+    return ftp_response(server->fds[client_index].fd, FTP_USER_OK);
 }

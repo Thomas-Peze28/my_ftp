@@ -5,15 +5,13 @@
 ** help command
 */
 
-#include "client.h"
+#include "server.h"
 
-void help_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args)
+void help_command(server_t *server, int client_index, char **args)
 {
-    (void)clients;
     (void)args;
-    ftp_response(fds[client_index].fd,
+    ftp_response(server->fds[client_index].fd,
         "214-The following commands are supported:\r\n"
-        "USER PASS PWD QUIT HELP NOOP CWD\r\n"
+        "USER PASS PWD QUIT HELP NOOP CWD CDUP DELE\r\n"
         "214 End of HELP info\r\n");
 }

@@ -6,7 +6,7 @@
 */
 
 #include "commands.h"
-#include "client.h"
+#include "server.h"
 
 int is_valid_password(const char *username, const char *password)
 {
@@ -15,18 +15,17 @@ int is_valid_password(const char *username, const char *password)
     return 0;
 }
 
-void pass_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args)
+void pass_command(server_t *server, int client_index, char **args)
 {
-    if (clients[client_index].is_logged)
-        return ftp_response(fds[client_index].fd, FTP_ALREADY_LOGIN);
-    if (is_valid_password(clients[client_index].username, args[1])) {
-        clients[client_index].is_logged = true;
-        return ftp_response(fds[client_index].fd, FTP_LOGIN_OK);
+    if (server->clients[client_index].is_logged)
+        return ftp_response(server->fds[client_index].fd, FTP_ALREADY_LOGIN);
+    if (is_valid_password(server->clients[client_index].username, args[1])) {
+        server->clients[client_index].is_logged = true;
+        return ftp_response(server->fds[client_index].fd, FTP_LOGIN_OK);
     }
     if (args[1] == NULL)
-        return ftp_response(fds[client_index].fd, FTP_NEED_PASS);
-    if (clients[client_index].username == NULL)
-        return ftp_response(fds[client_index].fd, FTP_BAD_SEQUENCE);
-    return ftp_response(fds[client_index].fd, FTP_BAD_LOGIN);
+        return ftp_response(server->fds[client_index].fd, FTP_NEED_PASS);
+    if (server->clients[client_index].username == NULL)
+        return ftp_response(server->fds[client_index].fd, FTP_BAD_SEQUENCE);
+    return ftp_response(server->fds[client_index].fd, FTP_BAD_LOGIN);
 }

@@ -5,20 +5,23 @@
 ** init_clients
 */
 
-#include "client.h"
+#include "server.h"
 
-void init_clients(client_t *clients, struct pollfd *fds, char *path)
+void init_clients(server_t *server, char *path)
 {
-    (void)path;
-    for (int i = 0; i < MAX_CLIENTS; i++) {
-        clients[i].fd = -1;
-        clients[i].is_logged = false;
-        clients[i].username = NULL;
-        clients[i].home_dir = NULL;
-        clients[i].current_dir = NULL;
-        fds[i].fd = -1;
-        fds[i].events = POLLIN;
-        clients[i].data_fd = -1;
-        clients[i].state = INACTIVE;
+    char real_path[PATH_MAX];
+
+    if (realpath(path, real_path) != NULL) {
+        server->home_dir = strdup(real_path);
+    } else {
+        server->home_dir = strdup(path);
+    }
+    for (int i = 1; i < MAX_CLIENTS; i++) {
+        server->clients[i].fd = -1;
+        server->clients[i].is_logged = false;
+        server->clients[i].username = NULL;
+        server->clients[i].current_dir = NULL;
+        server->fds[i].fd = -1;
+        server->fds[i].events = POLLIN;
     }
 }

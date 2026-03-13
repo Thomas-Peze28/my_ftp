@@ -5,12 +5,11 @@
 ** noop command
 */
 
-#include "client.h"
+#include "server.h"
 
-void noop_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args)
+void noop_command(server_t *server, int client_index, char **args)
 {
-    (void)clients;
     (void)args;
-    ftp_response(fds[client_index].fd, "200 NOOP command successful\r\n");
+    ftp_response(server->fds[client_index].fd,
+        "200 NOOP command successful\r\n");
 }

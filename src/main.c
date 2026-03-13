@@ -6,55 +6,42 @@
 */
 
 #include "myftp.h"
+#include <signal.h>
 
-void update_event_loop(struct pollfd *fds, client_t *clients)
+void update_event_loop(server_t *server)
 {
     for (int i = 1; i < MAX_CLIENTS; i++) {
-        if (fds[i].fd != -1 && (fds[i].revents & POLLIN))
-            handle_commands(i, clients, fds);
+        if (server->fds[i].fd != -1 && (server->fds[i].revents & POLLIN))
+            handle_commands(server, i);
     }
 }
 
-void init_server_socket(struct pollfd *fds, int socket_fd, int port)
+int myftp(int port, char *path)
 {
-    fds[0].fd = socket_fd;
-    fds[0].events = POLLIN;
-    printf("Server is listening on port %d\n", port);
-}
-
-int myftp(int port, int socket_fd, char *path)
-{
-    struct pollfd fds[MAX_CLIENTS];
-    client_t clients[MAX_CLIENTS];
+    server_t server;
     int poll_result = 0;
 
-    init_clients(clients, fds, path);
-    init_server_socket(fds, socket_fd, port);
+    if (init_server(&server, port) == -1)
+        return 84;
+    init_clients(&server, path);
     while (1) {
-        poll_result = poll(fds, MAX_CLIENTS, -1);
+        poll_result = poll(server.fds, MAX_CLIENTS, -1);
         if (poll_result == -1) {
             printf("Failed to poll\n");
             break;
         }
-        if (fds[0].revents & POLLIN)
-            accept_new_connection(socket_fd, clients, fds, path);
-        update_event_loop(fds, clients);
+        if (server.fds[0].revents & POLLIN)
+            accept_new_connection(&server, path);
+        update_event_loop(&server);
     }
-    close(socket_fd);
+    close(server.socket_fd);
+    free(server.home_dir);
     return 0;
 }
 
 int main(int argc, char **argv)
 {
-    int port = 0;
-    int socket_fd = 0;
-
     if (handle_errors(argc, argv))
         return 84;
-    port = atoi(argv[1]);
-    socket_fd = init_server(port);
-    if (socket_fd == -1)
-        return 84;
-    myftp(port, socket_fd, argv[2]);
-    return 0;
+    return myftp(atoi(argv[1]), argv[2]);
 }
