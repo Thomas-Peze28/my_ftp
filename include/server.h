@@ -30,7 +30,6 @@
 typedef struct server_s {
     int port;
     int socket_fd;
-    int data_socket_fd;
     int current_clients;
     client_t clients[MAX_CLIENTS];
     struct pollfd fds[MAX_CLIENTS];
@@ -41,5 +40,7 @@ int init_server(server_t *server, int port);
 void init_clients(server_t *server, char *path);
 int accept_new_connection(server_t *server, char *path);
 void disconnect_client(server_t *server, int index);
+int init_data_socket(int *data_fd, int port);
+unsigned char *get_socket_ip(int socket_fd);
 
 #endif /* SERVER_H */

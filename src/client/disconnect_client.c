@@ -20,4 +20,9 @@ void disconnect_client(server_t *server, int index)
         server->clients[index].current_dir = NULL;
         printf("Client on slot %d disconnected.\n", index);
     }
+    if (server->clients[index].data_fd != -1) {
+        close(server->clients[index].data_fd);
+        server->clients[index].data_fd = -1;
+        server->clients[index].state = INACTIVE;
+    }
 }

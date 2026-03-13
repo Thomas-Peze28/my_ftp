@@ -26,16 +26,16 @@
     #include "constant.h"
     #include "error_handling.h"
 
-typedef enum data_state {
+typedef enum data_state_s {
     INACTIVE,
     PASSIVE,
     ACTIVE
-} data_state;
+} data_state_t;
 
 typedef struct client_s {
     int fd;
     int data_fd;
-    data_state state;
+    data_state_t state;
     char *username;
     char *current_dir;
     bool is_logged;

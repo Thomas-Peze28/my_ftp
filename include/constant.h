@@ -31,6 +31,7 @@
     #define FTP_OUT_OF_ROOT "550 You try to escape the root directory !\r\n"
     #define FTP_FILE_DELETED "250 File successfully deleted\r\n"
     #define FTP_FILE_DELETE_FAIL "550 Failed to delete file\r\n"
+    #define FTP_DATA_CONNECTION "425 Can't open data connection\r\n"
 
     #define PATH_MAX 4096
 

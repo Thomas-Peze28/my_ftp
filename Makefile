@@ -6,6 +6,8 @@
 ##
 
 SERVER	=	src/server/init_server.c	\
+			src/server/init_data_socket.c	\
+			src/server/get_socket_ip.c	\
 
 CLIENT	=	src/client/init_clients.c	\
 			src/client/connect_client.c	\
