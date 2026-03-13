@@ -28,6 +28,6 @@
     #include "commands.h"
     #include "constant.h"
 
-int myftp(int port, int socket_fd, char *path);
+int myftp(int port, char *path);
 
 #endif /* MYFTP_H */

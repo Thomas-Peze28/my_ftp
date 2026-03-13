@@ -30,13 +30,7 @@ typedef struct client_s {
     int fd;
     char *username;
     char *current_dir;
-    char *home_dir;
     bool is_logged;
 } client_t;
-
-void init_clients(client_t *clients, struct pollfd *fds, char *path);
-int accept_new_connection(int server_fd, client_t *clients,
-    struct pollfd *fds, char *path);
-void disconnect_client(int index, client_t *clients, struct pollfd *fds);
 
 #endif /* CLIENT_H */

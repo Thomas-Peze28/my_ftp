@@ -29,33 +29,24 @@
 
 struct commands_s {
     const char *name;
-    void (*command)(int client_index, client_t *clients, struct pollfd *fds,
-        char **args);
+    void (*command)(server_t *server, int client_index, char **args);
 };
 
-void handle_commands(int client_index, client_t *clients, struct pollfd *fds);
+void handle_commands(server_t *server, int client_index);
 char **parse_command(const char *command);
 void print_command_args(char **args);
 void free_args(char **args);
 char **get_client_command(int client_fd, bool *disconnected);
 int verify_auth(int client_index, client_t *clients, struct pollfd *fds);
 
-void user_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args);
-void pass_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args);
-void pwd_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args);
-void help_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args);
-void noop_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args);
-void cwd_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args);
-void quit_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args);
-void cdup_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args);
-void dele_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args);
+void user_command(server_t *server, int client_index, char **args);
+void pass_command(server_t *server, int client_index, char **args);
+void pwd_command(server_t *server, int client_index, char **args);
+void help_command(server_t *server, int client_index, char **args);
+void noop_command(server_t *server, int client_index, char **args);
+void cwd_command(server_t *server, int client_index, char **args);
+void quit_command(server_t *server, int client_index, char **args);
+void cdup_command(server_t *server, int client_index, char **args);
+void dele_command(server_t *server, int client_index, char **args);
+
 #endif /* COMMANDS_H */

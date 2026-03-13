@@ -25,7 +25,21 @@
     #define SERVER_H
 
     #include "constant.h"
+    #include "client.h"
 
-int init_server(int port);
+typedef struct server_s {
+    int port;
+    int socket_fd;
+    int data_socket_fd;
+    int current_clients;
+    client_t clients[MAX_CLIENTS];
+    struct pollfd fds[MAX_CLIENTS];
+    char *home_dir;
+} server_t;
+
+int init_server(server_t *server, int port);
+void init_clients(server_t *server, char *path);
+int accept_new_connection(server_t *server, char *path);
+void disconnect_client(server_t *server, int index);
 
 #endif /* SERVER_H */

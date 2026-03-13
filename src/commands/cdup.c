@@ -5,40 +5,38 @@
 ** cdup command
 */
 
-#include "client.h"
+#include "server.h"
 #include "commands.h"
 
-int check_cdup_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args)
+int check_cdup_command(server_t *server, int client_index, char **args)
 {
-    if (!clients[client_index].is_logged) {
-        ftp_response(fds[client_index].fd, FTP_NOT_LOGGED_IN);
+    if (!server->clients[client_index].is_logged) {
+        ftp_response(server->fds[client_index].fd, FTP_NOT_LOGGED_IN);
         return -1;
     }
     if (args[1] != NULL) {
-        ftp_response(fds[client_index].fd, FTP_NEED_ARG);
+        ftp_response(server->fds[client_index].fd, FTP_NEED_ARG);
         return -1;
     }
     return 0;
 }
 
-void cdup_command(int client_index, client_t *clients, struct pollfd *fds,
-    char **args)
+void cdup_command(server_t *server, int client_index, char **args)
 {
     char target_path[PATH_MAX];
     char resolved_path[PATH_MAX];
 
-    if (check_cdup_command(client_index, clients, fds, args) == -1)
+    if (check_cdup_command(server, client_index, args) == -1)
         return;
     snprintf(target_path, sizeof(target_path), "%s/%s",
-        clients[client_index].current_dir, "..");
+        server->clients[client_index].current_dir, "..");
     if (realpath(target_path, resolved_path) == NULL)
-        return ftp_response(fds[client_index].fd, FTP_DIR_CHANGE_FAIL);
-    if (strncmp(resolved_path, clients[client_index].home_dir,
-        strlen(clients[client_index].home_dir)) != 0) {
-        return ftp_response(fds[client_index].fd, FTP_OUT_OF_ROOT);
+        return ftp_response(server->fds[client_index].fd, FTP_DIR_CHANGE_FAIL);
+    if (strncmp(resolved_path, server->home_dir,
+        strlen(server->home_dir)) != 0) {
+        return ftp_response(server->fds[client_index].fd, FTP_OUT_OF_ROOT);
     }
-    free(clients[client_index].current_dir);
-    clients[client_index].current_dir = strdup(resolved_path);
-    ftp_response(fds[client_index].fd, FTP_DIR_CHANGED);
+    free(server->clients[client_index].current_dir);
+    server->clients[client_index].current_dir = strdup(resolved_path);
+    ftp_response(server->fds[client_index].fd, FTP_DIR_CHANGED);
 }
