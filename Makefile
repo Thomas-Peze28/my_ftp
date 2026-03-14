@@ -25,6 +25,7 @@ COMMANDS	=	src/commands/handle_commands.c	\
 				src/commands/cdup.c	\
 				src/commands/dele.c	\
 				src/commands/pasv.c	\
+				src/commands/list.c	\
 
 ERRORS_HANDLING	=	src/error_handling/is_valid_home.c	\
 					src/error_handling/is_valid_port.c	\
@@ -32,6 +33,7 @@ ERRORS_HANDLING	=	src/error_handling/is_valid_home.c	\
 					src/error_handling/handle_errors.c	\
 					src/error_handling/return_error.c	\
 					src/error_handling/ftp_response.c	\
+					src/error_handling/list_check.c	\
 
 SRC	=	src/main.c	\
 		$(SERVER)	\

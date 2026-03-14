@@ -32,8 +32,13 @@
     #define FTP_FILE_DELETED "250 File successfully deleted\r\n"
     #define FTP_FILE_DELETE_FAIL "550 Failed to delete file\r\n"
     #define FTP_DATA_CONNECTION "425 Can't open data connection\r\n"
+    #define FTP_FILE_UNAVAILABLE "550 File unavailable\r\n"
+    #define FTP_FILE_STATUS "150 File status okay\r\n"
+    #define FTP_DIR_SEND_OK "226 Directory send OK\r\n"
 
     #define PATH_MAX 4096
+
+    #define HOME server->home_dir
 
 void ftp_response(int client_fd, const char *message);
 

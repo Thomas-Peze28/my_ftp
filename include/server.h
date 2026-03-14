@@ -42,5 +42,8 @@ int accept_new_connection(server_t *server, char *path);
 void disconnect_client(server_t *server, int index);
 int init_data_socket(int *data_fd, int port);
 unsigned char *get_socket_ip(int socket_fd);
+int check_data_sock(server_t *server, int client_index, int data_sock,
+    char *path);
+int check_path_error(server_t *server, int client_index, char *path);
 
 #endif /* SERVER_H */
