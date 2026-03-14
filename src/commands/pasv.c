@@ -64,7 +64,7 @@ void pasv_command(server_t *server, int client_index, char **args)
         return;
     check_state(server, client_index);
     data_port = init_data_socket(&server->clients[client_index].data_fd, 0);
-    if (data_port == -1) {
+    if (data_port == -1)
         return ftp_response(server->fds[client_index].fd, FTP_DATA_CONNECTION);
     port1 = data_port / 256;
     port2 = data_port % 256;
