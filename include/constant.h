@@ -35,6 +35,7 @@
     #define FTP_FILE_UNAVAILABLE "550 File unavailable\r\n"
     #define FTP_FILE_STATUS "150 File status okay\r\n"
     #define FTP_DIR_SEND_OK "226 Directory send OK\r\n"
+    #define FTP_TRANSFER_OK "226 Transfer complete\r\n"
 
     #define PATH_MAX 4096
 
