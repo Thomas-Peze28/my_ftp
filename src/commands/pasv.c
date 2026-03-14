@@ -68,7 +68,7 @@ void pasv_command(server_t *server, int client_index, char **args)
         return ftp_response(server->fds[client_index].fd, FTP_DATA_CONNECTION);
     port1 = data_port / 256;
     port2 = data_port % 256;
-    ip = get_socket_ip(server->socket_fd);
+    ip = get_socket_ip(server->fds[client_index].fd);
     if (check_ip(server, client_index, ip) == -1)
         return;
     server->clients[client_index].state = PASSIVE;
