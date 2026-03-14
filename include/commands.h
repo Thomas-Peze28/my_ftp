@@ -51,5 +51,6 @@ void dele_command(server_t *server, int client_index, char **args);
 void pasv_command(server_t *server, int client_index, char **args);
 void list_command(server_t *server, int client_index, char **args);
 void retr_command(server_t *server, int client_index, char **args);
+void stor_command(server_t *server, int client_index, char **args);
 
 #endif /* COMMANDS_H */

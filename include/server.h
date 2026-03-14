@@ -46,5 +46,6 @@ int check_data_sock(server_t *server, int client_index, int data_sock,
     char *path);
 int check_path_error(server_t *server, int client_index, char *path);
 char *check_retr_path(server_t *server, int client_index, char **args);
+char *check_stor_path(server_t *server, int client_index, char **args);
 
 #endif /* SERVER_H */
