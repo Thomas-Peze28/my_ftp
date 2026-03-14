@@ -21,6 +21,8 @@ The server currently implements the following FTP commands:
 - `PWD`  : Print the current working directory.
 - `PASV` : Enter passive mode.
 - `LIST` : List files in the current directory.
+- `RETR` : Download file from server to client.
+- `STOR` : Upload file from client to server.
 - `HELP` : Display helpful information about the server.
 - `NOOP` : No operation (keeps the connection alive).
 
