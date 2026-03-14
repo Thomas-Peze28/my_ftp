@@ -49,5 +49,6 @@ void quit_command(server_t *server, int client_index, char **args);
 void cdup_command(server_t *server, int client_index, char **args);
 void dele_command(server_t *server, int client_index, char **args);
 void pasv_command(server_t *server, int client_index, char **args);
+void list_command(server_t *server, int client_index, char **args);
 
 #endif /* COMMANDS_H */
